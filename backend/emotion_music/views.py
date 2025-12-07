@@ -14,7 +14,7 @@ def analyze_and_recommend(request):
     emotion = (
         request.data.get("emotion") or
         request.query_params.get("emotion") or
-        "angry"
+        "surprise"
     )
 
     songs = recommend_songs(

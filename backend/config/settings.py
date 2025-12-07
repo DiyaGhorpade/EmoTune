@@ -127,4 +127,3 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 LASTFM_API_KEY = os.getenv("LAST_FM_API_KEY")
-
