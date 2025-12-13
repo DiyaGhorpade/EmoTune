@@ -8,11 +8,25 @@ import EmotionDisplay from "@/components/EmotionDisplay";
 import SongCard from "@/components/SongCard";
 import { Camera, Upload, RefreshCw, X, Image as ImageIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { uploadImageForEmotion } from "@/services/emotionApi";
 
 type EmotionResult = {
   emotion: string;
   confidence: number;
+  recommendations: Array<{ title: string; artist: string; lastfm_url: string; youtube_search: string }>;
 } | null;
+
+function base64ToFile(base64: string, filename: string): File {
+  const arr = base64.split(',');
+  const mime = arr[0].match(/:(.*?);/)![1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
+}
 
 // Mock song data for different emotions
 const songsByEmotion: Record<string, Array<{ title: string; artist: string; coverUrl: string }>> = {
@@ -111,7 +125,7 @@ const Detect = () => {
         const imageData = canvas.toDataURL("image/jpeg");
         setCapturedImage(imageData);
         stopWebcam();
-        processImage();
+        processImage(imageData);
       }
     }
   };
@@ -123,27 +137,41 @@ const Detect = () => {
       reader.onload = (e) => {
         const imageData = e.target?.result as string;
         setCapturedImage(imageData);
-        processImage();
+        processImage(imageData);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const processImage = useCallback(() => {
+  const processImage = useCallback(async (imageData: string) => {
+    console.log("Processing image...");
     setIsProcessing(true);
     
-    // Simulate AI processing - in production this would call your DL model API
-    setTimeout(() => {
-      const randomEmotion = emotions[Math.floor(Math.random() * emotions.length)];
-      const randomConfidence = 0.7 + Math.random() * 0.25;
+    try {
+      const file = base64ToFile(imageData, "emotion.jpg");
+      console.log("Created file:", file.name, file.size, file.type);
+      
+      console.log("Calling uploadImageForEmotion...");
+      const result = await uploadImageForEmotion(file);
+      console.log("API response:", result);
       
       setEmotionResult({
-        emotion: randomEmotion,
-        confidence: randomConfidence,
+        emotion: result.emotion,
+        confidence: result.confidence,
+        recommendations: result.recommendations,
       });
+    } catch (error) {
+      console.error("Error processing image:", error);
+      toast({
+        title: "Error",
+        description: "Failed to analyze emotion. Please try again.",
+        variant: "destructive",
+      });
+      setEmotionResult(null);
+    } finally {
       setIsProcessing(false);
-    }, 2000);
-  }, []);
+    }
+  }, [toast]);
 
   const reset = () => {
     setCapturedImage(null);
@@ -363,12 +391,12 @@ const Detect = () => {
                       Songs for Your <span className="gradient-text capitalize">{emotionResult.emotion}</span> Mood
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      {songsByEmotion[emotionResult.emotion]?.map((song, index) => (
+                      {emotionResult.recommendations?.map((song, index) => (
                         <SongCard
                           key={song.title}
                           title={song.title}
                           artist={song.artist}
-                          coverUrl={song.coverUrl}
+                          coverUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" // Placeholder
                           emotion={emotionResult.emotion}
                           delay={index * 0.1}
                         />
