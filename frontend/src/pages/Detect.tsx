@@ -48,6 +48,12 @@ const songsByEmotion: Record<string, Array<{ title: string; artist: string; cove
     { title: "Bulls on Parade", artist: "RATM", coverUrl: "https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=300&h=300&fit=crop" },
     { title: "Given Up", artist: "Linkin Park", coverUrl: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&h=300&fit=crop" },
   ],
+  disgust: [
+    { title: "Smells Like Teen Spirit", artist: "Nirvana", coverUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" },
+    { title: "Basket Case", artist: "Green Day", coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop" },
+    { title: "Come as You Are", artist: "Nirvana", coverUrl: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=300&h=300&fit=crop" },
+    { title: "Lithium", artist: "Nirvana", coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&h=300&fit=crop" },
+  ],
   surprise: [
     { title: "Electric Feel", artist: "MGMT", coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=300&fit=crop" },
     { title: "Take On Me", artist: "A-ha", coverUrl: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300&h=300&fit=crop" },
@@ -82,7 +88,7 @@ const Detect = () => {
   
   const { toast } = useToast();
 
-  const emotions = ["happy", "sad", "angry", "surprise", "fear", "neutral"];
+  const emotions = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise"];
 
   const startWebcam = async () => {
     try {
