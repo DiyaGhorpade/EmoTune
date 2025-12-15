@@ -8,13 +8,23 @@ import EmotionDisplay from "@/components/EmotionDisplay";
 import SongCard from "@/components/SongCard";
 import { Camera, Upload, RefreshCw, X, Image as ImageIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { uploadImageForEmotion } from "@/services/emotionApi";
+import { detectEmotion } from "../services/emotionApi";
+
+type Song = {
+  name: string;
+  artist: {
+    name: string;
+  };
+  url: string;
+};
 
 type EmotionResult = {
   emotion: string;
   confidence: number;
-  recommendations: Array<{ title: string; artist: string; lastfm_url: string; youtube_search: string }>;
+  songs: Song[];
 } | null;
+
+
 
 function base64ToFile(base64: string, filename: string): File {
   const arr = base64.split(',');
@@ -158,13 +168,14 @@ const Detect = () => {
       console.log("Created file:", file.name, file.size, file.type);
       
       console.log("Calling uploadImageForEmotion...");
-      const result = await uploadImageForEmotion(file);
+      const result = await detectEmotion(file);
+
       console.log("API response:", result);
-      
+
       setEmotionResult({
-        emotion: result.emotion,
+         emotion: result.emotion,
         confidence: result.confidence,
-        recommendations: result.recommendations,
+        songs: result.songs,
       });
     } catch (error) {
       console.error("Error processing image:", error);
@@ -211,7 +222,7 @@ const Detect = () => {
             <p className="text-muted-foreground max-w-xl mx-auto">
               Use your webcam or upload an image to discover music that matches your mood
             </p>
-          </motion.div>
+        const res  </motion.div>
 
           <AnimatePresence mode="wait">
             {/* Mode Selection */}
@@ -397,15 +408,16 @@ const Detect = () => {
                       Songs for Your <span className="gradient-text capitalize">{emotionResult.emotion}</span> Mood
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      {emotionResult.recommendations?.map((song, index) => (
-                        <SongCard
-                          key={song.title}
-                          title={song.title}
-                          artist={song.artist}
-                          coverUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" // Placeholder
-                          emotion={emotionResult.emotion}
-                          delay={index * 0.1}
-                        />
+                      {emotionResult.songs?.map((song, index) => (
+                      <SongCard
+                            key={song.name}
+                            title={song.name}
+                            artist={song.artist.name}
+                            coverUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop"
+                            emotion={emotionResult.emotion}
+                            delay={index * 0.1}
+                            link={song.url}
+                       />
                       ))}
                     </div>
                   </div>

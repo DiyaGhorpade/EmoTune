@@ -21,7 +21,7 @@ def get_music(emotion):
             "tag": tag,
             "api_key": LASTFM_API_KEY,
             "format": "json",
-                "limit": 3
+                "limit": 5
             }
         )
         if r.status_code == 200:

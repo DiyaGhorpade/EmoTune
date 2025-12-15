@@ -8,9 +8,7 @@ from fastapi import UploadFile
 from app.core.emotions import EMOTIONS
 from app.utils.image_utils import preprocess_image
 
-# =========================
 # Custom Attention Layer (matches training)
-# =========================
 @tf.keras.utils.register_keras_serializable()
 class AttentionLayer(layers.Layer):
     def __init__(self, **kwargs):
@@ -39,9 +37,8 @@ class AttentionLayer(layers.Layer):
     def get_config(self):
         return super(AttentionLayer, self).get_config()
 
-# =========================
+
 # Model Loading
-# =========================
 MODEL_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "..",
@@ -60,9 +57,7 @@ _model = load_model(
 )
 print("Emotion model loaded successfully")
 
-# =========================
 # Prediction Function
-# =========================
 async def predict_emotion(upload_file: UploadFile):
     try:
         image_bytes = await upload_file.read()

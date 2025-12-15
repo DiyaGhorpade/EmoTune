@@ -8,9 +8,18 @@ interface SongCardProps {
   coverUrl: string;
   emotion: string;
   delay?: number;
+  link?: string;
 }
 
-const SongCard = ({ title, artist, coverUrl, emotion, delay = 0 }: SongCardProps) => {
+const SongCard = ({
+  title,
+  artist,
+  coverUrl,
+  emotion,
+  delay = 0,
+  link,
+}: SongCardProps) => {
+
   const emotionColors: Record<string, string> = {
     happy: "from-emotion-happy to-orange-500",
     sad: "from-emotion-sad to-blue-700",
@@ -18,6 +27,7 @@ const SongCard = ({ title, artist, coverUrl, emotion, delay = 0 }: SongCardProps
     surprise: "from-emotion-surprise to-pink-500",
     fear: "from-emotion-fear to-purple-800",
     neutral: "from-emotion-neutral to-gray-600",
+    disgust: "from-emotion-disgust to-gray-600",
   };
 
   return (
@@ -61,10 +71,19 @@ const SongCard = ({ title, artist, coverUrl, emotion, delay = 0 }: SongCardProps
           <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
             <Heart className="w-4 h-4" />
           </Button>
-          <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
-            <ExternalLink className="w-4 h-4" />
-          </Button>
-        </div>
+          {link && (
+              <Button
+                size="sm"
+                variant="ghost"
+                className="h-8 w-8 p-0"
+                asChild
+              >
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </Button>
+            )}
+          </div>
       </div>
     </motion.div>
   );
