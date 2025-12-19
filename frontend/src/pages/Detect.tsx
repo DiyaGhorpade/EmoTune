@@ -368,13 +368,12 @@ const Detect = () => {
                     <h3 className="text-2xl font-display font-bold mb-6">
                       Songs for Your <span className="gradient-text capitalize">{emotionResult.emotion}</span> Mood
                     </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
                       {emotionResult.songs?.map((song, index) => (
                         <SongCard
                           key={song.name}
                           title={song.name}
                           artist={song.artist.name}
-                          coverUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop"
                           emotion={emotionResult.emotion}
                           delay={index * 0.1}
                           link={song.spotifyUrl}

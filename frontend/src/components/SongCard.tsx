@@ -4,7 +4,6 @@ import { Card } from "@/components/ui/card";
 type SongCardProps = {
   title: string;
   artist: string;
-  coverUrl: string;
   emotion: string;
   delay?: number;
   link: string; // Spotify or fallback URL
@@ -13,7 +12,6 @@ type SongCardProps = {
 const SongCard = ({
   title,
   artist,
-  coverUrl,
   delay = 0,
   link,
 }: SongCardProps) => {
@@ -24,17 +22,11 @@ const SongCard = ({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: -10 }}
       transition={{ delay }}
     >
-      <Card variant="glass" className="p-3">
-        {/* Album art */}
-        <img
-          src={coverUrl}
-          alt={title}
-          className="w-full aspect-square object-cover rounded-lg mb-3"
-        />
+      <Card variant="glass" className="p-3 w-100 h-40">
 
         {/* Song info */}
         <h4 className="font-semibold text-sm truncate">{title}</h4>
