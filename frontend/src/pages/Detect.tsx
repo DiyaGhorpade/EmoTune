@@ -1,3 +1,4 @@
+// src/pages/Detect.tsx
 import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -12,10 +13,8 @@ import { detectEmotion } from "../services/emotionApi";
 
 type Song = {
   name: string;
-  artist: {
-    name: string;
-  };
-  url: string;
+  artist: { name: string };
+  spotifyUrl: string;
 };
 
 type EmotionResult = {
@@ -24,10 +23,8 @@ type EmotionResult = {
   songs: Song[];
 } | null;
 
-
-
 function base64ToFile(base64: string, filename: string): File {
-  const arr = base64.split(',');
+  const arr = base64.split(",");
   const mime = arr[0].match(/:(.*?);/)![1];
   const bstr = atob(arr[1]);
   let n = bstr.length;
@@ -39,7 +36,10 @@ function base64ToFile(base64: string, filename: string): File {
 }
 
 // Mock song data for different emotions
-const songsByEmotion: Record<string, Array<{ title: string; artist: string; coverUrl: string }>> = {
+const songsByEmotion: Record<
+  string,
+  Array<{ title: string; artist: string; coverUrl: string }>
+> = {
   happy: [
     { title: "Happy", artist: "Pharrell Williams", coverUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" },
     { title: "Good as Hell", artist: "Lizzo", coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop" },
@@ -90,22 +90,20 @@ const Detect = () => {
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [emotionResult, setEmotionResult] = useState<EmotionResult>(null);
   const [isWebcamActive, setIsWebcamActive] = useState(false);
-  
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
-  
-  const { toast } = useToast();
 
+  const { toast } = useToast();
   const emotions = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise"];
 
   const startWebcam = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user", width: 640, height: 480 }
+        video: { facingMode: "user", width: 640, height: 480 },
       });
-      
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
         streamRef.current = stream;
@@ -122,7 +120,7 @@ const Detect = () => {
 
   const stopWebcam = () => {
     if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current.getTracks().forEach((track) => track.stop());
       streamRef.current = null;
     }
     setIsWebcamActive(false);
@@ -134,7 +132,6 @@ const Detect = () => {
       const canvas = canvasRef.current;
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      
       const ctx = canvas.getContext("2d");
       if (ctx) {
         ctx.drawImage(video, 0, 0);
@@ -159,36 +156,30 @@ const Detect = () => {
     }
   };
 
-  const processImage = useCallback(async (imageData: string) => {
-    console.log("Processing image...");
-    setIsProcessing(true);
-    
-    try {
-      const file = base64ToFile(imageData, "emotion.jpg");
-      console.log("Created file:", file.name, file.size, file.type);
-      
-      console.log("Calling uploadImageForEmotion...");
-      const result = await detectEmotion(file);
-
-      console.log("API response:", result);
-
-      setEmotionResult({
-         emotion: result.emotion,
-        confidence: result.confidence,
-        songs: result.songs,
-      });
-    } catch (error) {
-      console.error("Error processing image:", error);
-      toast({
-        title: "Error",
-        description: "Failed to analyze emotion. Please try again.",
-        variant: "destructive",
-      });
-      setEmotionResult(null);
-    } finally {
-      setIsProcessing(false);
-    }
-  }, [toast]);
+  const processImage = useCallback(
+    async (imageData: string) => {
+      setIsProcessing(true);
+      try {
+        const file = base64ToFile(imageData, "emotion.jpg");
+        const result = await detectEmotion(file);
+        setEmotionResult({
+          emotion: result.emotion,
+          confidence: result.confidence,
+          songs: result.songs,
+        });
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: "Failed to analyze emotion. Please try again.",
+          variant: "destructive",
+        });
+        setEmotionResult(null);
+      } finally {
+        setIsProcessing(false);
+      }
+    },
+    [toast]
+  );
 
   const reset = () => {
     setCapturedImage(null);
@@ -199,15 +190,12 @@ const Detect = () => {
 
   const handleModeSelect = (selectedMode: "webcam" | "upload") => {
     setMode(selectedMode);
-    if (selectedMode === "webcam") {
-      startWebcam();
-    }
+    if (selectedMode === "webcam") startWebcam();
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
       <main className="pt-24 pb-20 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -222,7 +210,7 @@ const Detect = () => {
             <p className="text-muted-foreground max-w-xl mx-auto">
               Use your webcam or upload an image to discover music that matches your mood
             </p>
-        const res  </motion.div>
+          </motion.div>
 
           <AnimatePresence mode="wait">
             {/* Mode Selection */}
@@ -279,13 +267,7 @@ const Detect = () => {
               >
                 <Card variant="glass" className="p-6">
                   <div className="relative aspect-video rounded-xl overflow-hidden bg-secondary mb-6">
-                    <video
-                      ref={videoRef}
-                      autoPlay
-                      playsInline
-                      muted
-                      className="w-full h-full object-cover"
-                    />
+                    <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
                     {!isWebcamActive && (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <p className="text-muted-foreground">Loading camera...</p>
@@ -296,15 +278,12 @@ const Detect = () => {
                       <div className="w-48 h-48 border-2 border-primary/50 rounded-full animate-pulse" />
                     </div>
                   </div>
-                  
                   <div className="flex items-center justify-center gap-4">
                     <Button variant="outline" size="lg" onClick={reset}>
-                      <X className="w-5 h-5 mr-2" />
-                      Cancel
+                      <X className="w-5 h-5 mr-2" /> Cancel
                     </Button>
                     <Button variant="hero" size="lg" onClick={capturePhoto} disabled={!isWebcamActive}>
-                      <Camera className="w-5 h-5 mr-2" />
-                      Capture Photo
+                      <Camera className="w-5 h-5 mr-2" /> Capture Photo
                     </Button>
                   </div>
                 </Card>
@@ -331,19 +310,10 @@ const Detect = () => {
                     <p className="text-muted-foreground text-sm">or drag and drop</p>
                     <p className="text-muted-foreground text-xs mt-2">PNG, JPG up to 10MB</p>
                   </div>
-                  
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                  />
-                  
+                  <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
                   <div className="flex items-center justify-center">
                     <Button variant="outline" size="lg" onClick={reset}>
-                      <X className="w-5 h-5 mr-2" />
-                      Cancel
+                      <X className="w-5 h-5 mr-2" /> Cancel
                     </Button>
                   </div>
                 </Card>
@@ -374,12 +344,7 @@ const Detect = () => {
 
             {/* Results */}
             {emotionResult && !isProcessing && (
-              <motion.div
-                key="results"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-              >
+              <motion.div key="results" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   {/* Emotion Result */}
                   <div className="lg:col-span-1">
@@ -389,14 +354,10 @@ const Detect = () => {
                           <img src={capturedImage} alt="Your photo" className="w-full h-full object-cover" />
                         </div>
                       )}
-                      <EmotionDisplay
-                        emotion={emotionResult.emotion}
-                        confidence={emotionResult.confidence}
-                      />
+                      <EmotionDisplay emotion={emotionResult.emotion} confidence={emotionResult.confidence} />
                       <div className="mt-8 flex flex-col gap-3">
                         <Button variant="gradient" size="lg" onClick={reset} className="w-full">
-                          <RefreshCw className="w-5 h-5 mr-2" />
-                          Try Again
+                          <RefreshCw className="w-5 h-5 mr-2" /> Try Again
                         </Button>
                       </div>
                     </Card>
@@ -409,15 +370,15 @@ const Detect = () => {
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       {emotionResult.songs?.map((song, index) => (
-                      <SongCard
-                            key={song.name}
-                            title={song.name}
-                            artist={song.artist.name}
-                            coverUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop"
-                            emotion={emotionResult.emotion}
-                            delay={index * 0.1}
-                            link={song.url}
-                       />
+                        <SongCard
+                          key={song.name}
+                          title={song.name}
+                          artist={song.artist.name}
+                          coverUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop"
+                          emotion={emotionResult.emotion}
+                          delay={index * 0.1}
+                          link={song.spotifyUrl}
+                        />
                       ))}
                     </div>
                   </div>
@@ -427,7 +388,6 @@ const Detect = () => {
           </AnimatePresence>
         </div>
       </main>
-
       <Footer />
     </div>
   );

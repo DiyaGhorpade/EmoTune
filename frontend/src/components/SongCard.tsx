@@ -1,92 +1,68 @@
 import { motion } from "framer-motion";
-import { Play, Heart, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
-interface SongCardProps {
+type SongCardProps = {
   title: string;
   artist: string;
   coverUrl: string;
   emotion: string;
   delay?: number;
-  link?: string;
-}
+  link: string; // Spotify or fallback URL
+};
 
 const SongCard = ({
   title,
   artist,
   coverUrl,
-  emotion,
   delay = 0,
   link,
 }: SongCardProps) => {
-
-  const emotionColors: Record<string, string> = {
-    happy: "from-emotion-happy to-orange-500",
-    sad: "from-emotion-sad to-blue-700",
-    angry: "from-emotion-angry to-red-700",
-    surprise: "from-emotion-surprise to-pink-500",
-    fear: "from-emotion-fear to-purple-800",
-    neutral: "from-emotion-neutral to-gray-600",
-    disgust: "from-emotion-disgust to-gray-600",
-  };
+  const spotifyEmbedUrl =
+    link && link.includes("open.spotify.com")
+      ? link.replace("open.spotify.com/", "open.spotify.com/embed/")
+      : null;
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.4, delay }}
-      className="group relative bg-secondary/30 backdrop-blur-xl rounded-2xl overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-300"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay }}
     >
-      {/* Cover Image */}
-      <div className="relative aspect-square overflow-hidden">
+      <Card variant="glass" className="p-3">
+        {/* Album art */}
         <img
           src={coverUrl}
-          alt={`${title} cover`}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          alt={title}
+          className="w-full aspect-square object-cover rounded-lg mb-3"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
-        
-        {/* Play Button Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button
-            size="lg"
-            className="rounded-full w-14 h-14 bg-primary shadow-lg shadow-primary/50"
+
+        {/* Song info */}
+        <h4 className="font-semibold text-sm truncate">{title}</h4>
+        <p className="text-xs text-muted-foreground truncate">{artist}</p>
+
+        {/* Spotify Embed or fallback link */}
+        {spotifyEmbedUrl ? (
+          <iframe
+            src={spotifyEmbedUrl}
+            width="100%"
+            height="150"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            className="mt-3 rounded-md"
+          />
+        ) : (
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-primary underline mt-3 inline-block"
           >
-            <Play className="w-6 h-6 fill-primary-foreground" />
-          </Button>
-        </div>
-
-        {/* Emotion Badge */}
-        <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${emotionColors[emotion]} text-white`}>
-          {emotion.charAt(0).toUpperCase() + emotion.slice(1)}
-        </div>
-      </div>
-
-      {/* Info */}
-      <div className="p-4">
-        <h4 className="font-display font-semibold truncate">{title}</h4>
-        <p className="text-sm text-muted-foreground truncate">{artist}</p>
-        
-        <div className="flex items-center gap-2 mt-3">
-          <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
-            <Heart className="w-4 h-4" />
-          </Button>
-          {link && (
-              <Button
-                size="sm"
-                variant="ghost"
-                className="h-8 w-8 p-0"
-                asChild
-              >
-                <a href={link} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </Button>
-            )}
-          </div>
-      </div>
-    </motion.div>
-  );
+            Play on Spotify
+          </a>
+        )}
+      </Card>
+    </motion.div>  );
 };
 
 export default SongCard;
