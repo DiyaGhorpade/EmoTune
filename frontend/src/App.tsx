@@ -9,6 +9,9 @@ import Login from "./pages/Login";
 import Detect from "./pages/Detect";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import Playlist from "./pages/Playlist";
+import Favourites from "./pages/Favourites";
+import Analytics from "./pages/Analytics";
 
 const queryClient = new QueryClient();
 
@@ -24,8 +27,9 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/detect" element={<Detect />} />
           <Route path="/about" element={<About />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="/playlist" element={<Playlist />} />
+          <Route path="/favourites" element={<Favourites />} />
+          <Route path="/analytics" element={<Analytics />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
