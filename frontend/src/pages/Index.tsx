@@ -124,7 +124,7 @@ const Index = () => {
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <Button variant="hero" size="xl" asChild>
-                <Link to="/detect" className="flex items-center gap-2">
+                <Link to="/signup" className="flex items-center gap-2">
                   <Play className="w-5 h-5" />
                   Try It Now
                 </Link>
@@ -263,10 +263,7 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button variant="hero" size="xl" asChild>
-                  <Link to="/signup">Get Started Free</Link>
-                </Button>
-                <Button variant="outline" size="xl" asChild>
-                  <Link to="/detect">Try Without Account</Link>
+                  <Link to="/signup">Get Started for Free</Link>
                 </Button>
               </div>
             </div>

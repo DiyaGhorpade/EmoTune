@@ -8,11 +8,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Detect", path: "/detect" },
-    { name: "About", path: "/about" },
-  ];
+ 
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -31,22 +27,6 @@ const Navbar = () => {
             <span className="text-xl font-display font-bold gradient-text">MoodTune</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-sm font-medium transition-colors duration-300 ${
-                  isActive(link.path)
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
@@ -77,30 +57,6 @@ const Navbar = () => {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border"
           >
-            <div className="px-4 py-4 space-y-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`block py-2 text-base font-medium transition-colors ${
-                    isActive(link.path)
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <div className="pt-4 space-y-3">
-                <Button variant="outline" className="w-full" asChild>
-                  <Link to="/login" onClick={() => setIsOpen(false)}>Sign In</Link>
-                </Button>
-                <Button variant="gradient" className="w-full" asChild>
-                  <Link to="/signup" onClick={() => setIsOpen(false)}>Get Started</Link>
-                </Button>
-              </div>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

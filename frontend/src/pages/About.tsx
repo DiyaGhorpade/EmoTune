@@ -207,7 +207,7 @@ const About = () => {
                 Try our emotion detection and discover music that truly resonates with how you feel.
               </p>
               <Button variant="hero" size="xl" asChild>
-                <Link to="/detect" className="flex items-center gap-2">
+                <Link to="/signup" className="flex items-center gap-2">
                   Start Detection
                   <ArrowRight className="w-5 h-5" />
                 </Link>
