@@ -12,6 +12,7 @@ import { detectEmotion } from "../services/emotionApi";
 import {signOut} from "firebase/auth"
 import { useNavigate } from "react-router-dom";
 import { auth } from "../lib/firebase";
+import {Headphones,Heart,BarChart3} from "lucide-react"
 
 type Song = {
   name: string;
@@ -272,6 +273,52 @@ const handleSignOut = async () => {
                     </p>
                   </div>
                 </Card>
+                <Card
+                  variant="glass"
+                  className="p-8 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
+                  onClick={() => handleModeSelect("webcam")}
+                >
+                  <div className="text-center">
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Headphones className="w-10 h-10 text-primary-foreground" />
+                    </div>
+                    <h3 className="text-xl font-display font-semibold mb-2">View Playlist</h3>
+                    <p className="text-muted-foreground text-sm">
+                      Find songs added to your curated playlist
+                    </p>
+                  </div>
+                </Card>
+                <Card
+                  variant="glass"
+                  className="p-8 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
+                  onClick={() => handleModeSelect("webcam")}
+                >
+                  <div className="text-center">
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Heart className="w-10 h-10 text-primary-foreground" />
+                    </div>
+                    <h3 className="text-xl font-display font-semibold mb-2">Favourite Songs</h3>
+                    <p className="text-muted-foreground text-sm">
+                      Checkout your most favourite songs
+                    </p>
+                  </div>
+                </Card>
+                <Card
+                  variant="glass"
+                  className="p-8 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
+                  onClick={() => handleModeSelect("webcam")}
+                >
+                  <div className="text-center">
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <BarChart3 className="w-10 h-10 text-primary-foreground" />
+                    </div>
+                    <h3 className="text-xl font-display font-semibold mb-2">Analytics Dashboard</h3>
+                    <p className="text-muted-foreground text-sm">
+                      View general trends of your listening history
+                    </p>
+                  </div>
+                </Card>
+
               </motion.div>
             )}
 

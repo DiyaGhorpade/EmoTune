@@ -145,18 +145,7 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="mt-20 relative"
           >
-            <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden border border-border/50 bg-secondary/20 backdrop-blur-xl p-2">
-              <div className="rounded-2xl overflow-hidden bg-background">
-                <div className="aspect-video bg-gradient-to-br from-secondary via-secondary/50 to-background flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-accent mx-auto mb-4 flex items-center justify-center animate-float">
-                      <Music2 className="w-12 h-12 text-primary-foreground" />
-                    </div>
-                    <p className="text-muted-foreground">Your emotion-driven music experience awaits</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
             {/* Glow effect */}
             <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 blur-3xl opacity-50" />
           </motion.div>
@@ -164,7 +153,7 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4">
+      <section className="py-30 px-4">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -195,7 +184,7 @@ const Index = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 px-4 bg-secondary/20">
+      <section className="mt-40 py-40 px-4 bg-secondary/20">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
