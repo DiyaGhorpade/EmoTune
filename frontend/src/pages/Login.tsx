@@ -90,7 +90,7 @@ const Login = () => {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <Music className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-display font-bold gradient-text">MoodTune</span>
+            <span className="text-xl font-display font-bold gradient-text">EmoTune</span>
           </div>
 
           {/* Heading */}
@@ -159,29 +159,6 @@ const Login = () => {
             </Button>
           </form>
 
-          {/* Divider */}
-          <div className="relative my-8">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-border" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-background text-muted-foreground">
-                or continue with
-              </span>
-            </div>
-          </div>
-
-          {/* Social Login */}
-          <div className="grid grid-cols-2 gap-4">
-            <Button variant="outline" size="lg" className="w-full">
-              {/* Google SVG */}
-              Google
-            </Button>
-            <Button variant="outline" size="lg" className="w-full">
-              {/* GitHub SVG */}
-              GitHub
-            </Button>
-          </div>
 
           {/* Signup Link */}
           <p className="mt-8 text-center text-muted-foreground">

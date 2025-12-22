@@ -24,7 +24,7 @@ const Navbar = () => {
               </div>
               <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary to-accent blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
             </div>
-            <span className="text-xl font-display font-bold gradient-text">MoodTune</span>
+            <span className="text-xl font-display font-bold gradient-text">EmoTune</span>
           </Link>
 
 

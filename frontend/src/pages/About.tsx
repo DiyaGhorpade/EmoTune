@@ -10,14 +10,14 @@ const About = () => {
   const team = [
     { name: "AI Model", role: "Deep Learning", description: "Trained on millions of facial expressions to accurately detect emotions" },
     { name: "Music Engine", role: "Recommendation", description: "Curates the perfect playlist based on your emotional state" },
-    { name: "Privacy", role: "Security", description: "Your images are processed locally and never stored" },
+    { name: "Privacy", role: "Security", description: "Images are processed locally and never stored" },
   ];
 
   const stats = [
-    { value: "99%", label: "Accuracy" },
+    { value: "80%", label: "Accuracy" },
     { value: "7", label: "Emotions Detected" },
     { value: "10K+", label: "Songs Curated" },
-    { value: "<1s", label: "Response Time" },
+    { value: "<5s", label: "Response Time" },
   ];
 
   return (

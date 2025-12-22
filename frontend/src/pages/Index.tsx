@@ -32,7 +32,7 @@ const Index = () => {
     {
       icon: Brain,
       title: "Deep Learning Model",
-      description: "Powered by advanced neural networks trained on millions of facial expressions.",
+      description: "Powered by deep learning models trained on 64 thousand facial expressions.",
     },
     {
       icon: Music2,
@@ -92,7 +92,7 @@ const Index = () => {
               transition={{ duration: 0.6 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 mb-8"
             >
-              <Sparkles className="w-4 h-4 text-primary" />
+              
               <span className="text-sm text-muted-foreground">AI-Powered Music Discovery</span>
             </motion.div>
 
@@ -113,7 +113,7 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
             >
-              Experience music that truly resonates with how you feel. Our AI analyzes your facial expressions 
+              Experience music that truly resonates with how you feel. Our software analyzes your facial expressions 
               to recommend the perfect soundtrack for your mood.
             </motion.p>
 

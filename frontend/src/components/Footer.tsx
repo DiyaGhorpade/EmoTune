@@ -12,7 +12,7 @@ const Footer = () => {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                 <Music className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-display font-bold gradient-text">MoodTune</span>
+              <span className="text-xl font-display font-bold gradient-text">EmoTune</span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-xs">
               Discover music that matches your mood using AI-powered facial emotion recognition. Let your feelings guide your playlist.
@@ -23,7 +23,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-semibold mb-4">Product</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/detect" className="hover:text-foreground transition-colors">Detect Emotion</Link></li>
+              <li><Link to="/signup" className="hover:text-foreground transition-colors">Detect Emotion</Link></li>
               <li><Link to="/about" className="hover:text-foreground transition-colors">How It Works</Link></li>
               <li><Link to="/about" className="hover:text-foreground transition-colors">Features</Link></li>
             </ul>
@@ -41,7 +41,7 @@ const Footer = () => {
 
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} MoodTune. All rights reserved.
+            © {new Date().getFullYear()} EmoTune. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
