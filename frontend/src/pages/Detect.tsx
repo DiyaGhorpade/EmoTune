@@ -3,13 +3,15 @@ import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EmotionDisplay from "@/components/EmotionDisplay";
 import SongCard from "@/components/SongCard";
 import { Camera, Upload, RefreshCw, X, Image as ImageIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { detectEmotion } from "../services/emotionApi";
+import {signOut} from "firebase/auth"
+import { useNavigate } from "react-router-dom";
+import { auth } from "../lib/firebase";
 
 type Song = {
   name: string;
@@ -193,10 +195,27 @@ const Detect = () => {
     if (selectedMode === "webcam") startWebcam();
   };
 
+  const navigate = useNavigate();
+
+const handleSignOut = async () => {
+  try {
+    await signOut(auth);
+    navigate("/"); 
+  } catch (err) {
+    console.error("Sign out failed", err);
+  }
+};
+
+
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
       <main className="pt-24 pb-20 px-4">
+         <button
+            onClick={handleSignOut}
+            className="fixed top-6 right-6 z-[9999] bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-700"
+          >
+           Sign Out
+          </button>
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <motion.div
@@ -362,7 +381,6 @@ const Detect = () => {
                       </div>
                     </Card>
                   </div>
-
                   {/* Song Recommendations */}
                   <div className="lg:col-span-2">
                     <h3 className="text-2xl font-display font-bold mb-6">
