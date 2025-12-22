@@ -434,10 +434,10 @@ const handleSignOut = async () => {
                   </div>
                   {/* Song Recommendations */}
                   <div className="lg:col-span-2">
-                    <h3 className="text-2xl font-display font-bold mb-6">
+                    <h3 className="text-2xl font-display font-bold mb-10">
                       Songs for Your <span className="gradient-text capitalize">{emotionResult.emotion}</span> Mood
                     </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-10">
                       {emotionResult.songs?.map((song, index) => (
                         <SongCard
                           key={song.name}
