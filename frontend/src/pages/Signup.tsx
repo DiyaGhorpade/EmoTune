@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Music, Mail, Lock, User, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { auth } from "@/lib/firebase"; // import firebase auth
+import { auth } from "@/lib/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const Signup = () => {
@@ -33,7 +33,7 @@ const Signup = () => {
 
       toast({
         title: "Account created!",
-        description: `Welcome to MoodTune, ${name}! Start discovering music.`,
+        description: `Welcome to EmoTune, ${name}! Start discovering music.`,
       });
 
       navigate("/detect"); // redirect after signup
@@ -72,7 +72,7 @@ const Signup = () => {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <Music className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-display font-bold gradient-text">MoodTune</span>
+            <span className="text-xl font-display font-bold gradient-text">EmoTune</span>
           </div>
 
           {/* Heading */}
@@ -153,29 +153,7 @@ const Signup = () => {
             </Button>
           </form>
 
-          {/* Divider */}
-          <div className="relative my-8">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-border" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-background text-muted-foreground">
-                or continue with
-              </span>
-            </div>
-          </div>
-
-          {/* Social Login */}
-          <div className="grid grid-cols-2 gap-4">
-            <Button variant="outline" size="lg" className="w-full">
-              {/* Google SVG */}
-              Google
-            </Button>
-            <Button variant="outline" size="lg" className="w-full">
-              {/* GitHub SVG */}
-              GitHub
-            </Button>
-          </div>
+          
 
           {/* Login Link */}
           <p className="mt-8 text-center text-muted-foreground">
@@ -204,7 +182,7 @@ const Signup = () => {
               Music for Every <span className="gradient-text">Mood</span>
             </h2>
             <p className="text-muted-foreground max-w-sm">
-              Join MoodTune and discover playlists that match exactly how you feel
+              Join EmoTune and discover playlists that match exactly how you feel
             </p>
           </div>
         </div>
