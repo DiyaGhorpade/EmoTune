@@ -37,7 +37,7 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-display font-bold mb-6"
           >
-            About <span className="gradient-text">MoodTune</span>
+            About EmoTune
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -85,7 +85,7 @@ const About = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-              The Technology <span className="gradient-text">Behind</span>
+              The Technology Behind
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               A combination of deep learning and music intelligence
@@ -160,7 +160,7 @@ const About = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-              What Makes Us <span className="gradient-text">Different</span>
+              What Makes Us Different
             </h2>
           </motion.div>
 

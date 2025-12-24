@@ -86,15 +86,7 @@ const Index = () => {
 
         <div className="relative max-w-7xl mx-auto">
           <div className="text-center max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 mb-8"
-            >
-              
-              <span className="text-sm text-muted-foreground">AI-Powered Music Discovery</span>
-            </motion.div>
+            
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -102,8 +94,7 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl sm:text-5xl md:text-7xl font-display font-bold mb-6 leading-tight"
             >
-              Let Your <span className="gradient-text">Emotions</span>
-              <br />
+              Let Your Emotions              <br />
               Choose Your Music
             </motion.h1>
 
@@ -123,7 +114,7 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
-              <Button variant="hero" size="xl" asChild>
+              <Button variant="glass" size="xl" asChild>
                 <Link to="/signup" className="flex items-center gap-2">
                   <Play className="w-5 h-5" />
                   Try It Now
@@ -162,7 +153,7 @@ const Index = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-              Powerful <span className="gradient-text">Features</span>
+              Powerful Features
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Everything you need to discover music that matches your mood
@@ -193,7 +184,7 @@ const Index = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-              How It <span className="gradient-text">Works</span>
+              How It Works
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Three simple steps to your perfect playlist
@@ -245,7 +236,7 @@ const Index = () => {
             {/* Content */}
             <div className="relative z-10 p-8 md:p-16 text-center">
               <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-                Ready to Discover Your <span className="gradient-text">Sound</span>?
+                Ready to Discover Your Sound?
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
                 Join thousands of users who have found their perfect playlist through emotion-driven music discovery.

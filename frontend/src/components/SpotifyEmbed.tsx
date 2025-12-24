@@ -1,4 +1,4 @@
-// src/components/SpotifyEmbed.tsx
+
 const SpotifyEmbed = ({ trackId }: { trackId: string }) => {
   return (
     <iframe

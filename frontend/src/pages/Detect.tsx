@@ -227,7 +227,7 @@ const handleSignOut = async () => {
             className="text-center mb-12"
           >
             <h1 className="text-3xl md:text-5xl font-display font-bold mb-4">
-              Detect Your <span className="gradient-text">Emotion</span>
+              Detect Your Emotion
             </h1>
             <p className="text-muted-foreground max-w-xl mx-auto">
               Use your webcam or upload an image to discover music that matches your mood
