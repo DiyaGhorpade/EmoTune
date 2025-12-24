@@ -417,21 +417,33 @@ const handleSignOut = async () => {
               <motion.div key="results" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   {/* Emotion Result */}
-                  <div className="lg:col-span-1">
-                    <Card variant="glass" className="p-8">
-                      {capturedImage && (
-                        <div className="w-40 h-40 rounded-full overflow-hidden mx-auto mb-6 border-4 border-primary shadow-lg shadow-primary/20">
-                          <img src={capturedImage} alt="Your photo" className="w-full h-full object-cover" />
-                        </div>
-                      )}
-                      <EmotionDisplay emotion={emotionResult.emotion} confidence={emotionResult.confidence} />
-                      <div className="mt-8 flex flex-col gap-3">
-                        <Button variant="gradient" size="lg" onClick={reset} className="w-full">
-                          <RefreshCw className="w-5 h-5 mr-2" /> Try Again
-                        </Button>
+                      <div className="lg:col-span-1">
+                        <Card variant="glass" className="p-8">
+                          {capturedImage && (
+                            <div className="w-40 h-40 rounded-full overflow-hidden mx-auto mb-6 border-4 border-primary shadow-lg shadow-primary/20">
+                              <img src={capturedImage} alt="Your photo" className="w-full h-full object-cover" />
+                            </div>
+                          )}
+                          <EmotionDisplay emotion={emotionResult.emotion} confidence={emotionResult.confidence} />
+
+                          
+
+                          <div className="mt-6 flex flex-col gap-3">
+                            <Button variant="gradient" size="lg" onClick={reset} className="w-full">
+                              <RefreshCw className="w-5 h-5 mr-2" /> Try Again
+                            </Button>
+                            {/*Button: View Favourite Songs */}
+                          <div className="mt-6 flex flex-col gap-3">
+                            <Link to="/favourites">
+                              <Button variant="secondary" size="lg" className="w-full">
+                                <Heart className="w-5 h-5 mr-2" /> View Favourite Songs
+                              </Button>
+                            </Link>
+                          </div>
+                          </div>
+                        </Card>
                       </div>
-                    </Card>
-                  </div>
+
                   {/* Song Recommendations */}
                   <div className="lg:col-span-2">
                     <h3 className="text-2xl font-display font-bold mb-10">

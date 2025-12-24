@@ -1,29 +1,56 @@
-import { favouriteSongs } from "@/data/musicData";
-import { Card } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import SongCard from "@/components/SongCard";
 
 export default function Favourites() {
-  return (
-    <section className="min-h-screen px-6 py-20">
-      <h1 className="text-4xl font-bold mb-2">Favourite Songs</h1>
-      <p className="text-muted-foreground mb-10">
-        Your most loved tracks
-      </p>
+  const [songs, setSongs] = useState<any[]>([]);
 
-      <div className="grid gap-4 max-w-3xl">
-        {favouriteSongs.map(song => (
-          <Card key={song.id} variant="glass" className="p-4 flex justify-between">
-            <div>
-              <h3 className="font-semibold">{song.title}</h3>
-              <p className="text-sm text-muted-foreground">
-                {song.artist}
-              </p>
-            </div>
-            <span className="text-sm text-muted-foreground">
-              Plays: {song.plays}
-            </span>
-          </Card>
-        ))}
-      </div>
-    </section>
+  const loadFavorites = () => {
+    try {
+      const favs = localStorage.getItem("favourites");
+      const parsed = favs ? JSON.parse(favs) : [];
+      setSongs(parsed);
+      console.log("Loaded favorites:", parsed.length);
+    } catch (error) {
+      console.error("Error loading favorites:", error);
+      setSongs([]);
+    }
+  };
+
+  useEffect(() => {
+    // Load favorites on mount
+    loadFavorites();
+
+    // Listen for updates from other components
+    const handleUpdate = () => loadFavorites();
+    window.addEventListener("favoritesUpdated", handleUpdate);
+
+    return () => {
+      window.removeEventListener("favoritesUpdated", handleUpdate);
+    };
+  }, []);
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 py-10">
+      <h2 className="text-2xl font-bold mb-6">❤️ Your Favourites</h2>
+
+      {songs.length === 0 ? (
+        <p className="text-muted-foreground">
+          No favourites yet. Click the heart icon on any song to add it here!
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {songs.map((song, i) => (
+            <SongCard
+              key={song.link}
+              title={song.title}
+              artist={song.artist}
+              emotion={song.emotion}
+              link={song.link}
+              delay={i * 0.05}
+            />
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
