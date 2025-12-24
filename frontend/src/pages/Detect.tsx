@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../lib/firebase";
 import {Headphones,Heart,BarChart3} from "lucide-react"
 import {Link} from "react-router-dom"
+import {Plus } from "lucide-react";
 
 type Song = {
   name: string;
@@ -439,6 +440,14 @@ const handleSignOut = async () => {
                                 <Heart className="w-5 h-5 mr-2" /> View Favourite Songs
                               </Button>
                             </Link>
+                            {/*Button: View Playlists */}
+                          <div className="mt-6 flex flex-col gap-3">
+                            <Link to="/playlist">
+                              <Button variant="secondary" size="lg" className="w-full">
+                                <Plus className="w-5 h-5 mr-2" /> View Playlists
+                              </Button>
+                            </Link>
+                          </div>
                           </div>
                           </div>
                         </Card>
