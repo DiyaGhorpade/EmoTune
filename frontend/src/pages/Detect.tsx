@@ -426,10 +426,7 @@ const handleSignOut = async () => {
                             </div>
                           )}
                           <EmotionDisplay emotion={emotionResult.emotion} confidence={emotionResult.confidence} />
-
-                          
-
-                          <div className="mt-6 flex flex-col gap-3">
+                      <div className="mt-6 flex flex-col gap-3">
                             <Button variant="gradient" size="lg" onClick={reset} className="w-full">
                               <RefreshCw className="w-5 h-5 mr-2" /> Try Again
                             </Button>
@@ -445,6 +442,14 @@ const handleSignOut = async () => {
                             <Link to="/playlist">
                               <Button variant="secondary" size="lg" className="w-full">
                                 <Plus className="w-5 h-5 mr-2" /> View Playlists
+                              </Button>
+                            </Link>
+                          </div>
+                          {/*Button: View Analytics */}
+                          <div className="mt-6 flex flex-col gap-3">
+                            <Link to="/analytics">
+                              <Button variant="secondary" size="lg" className="w-full">
+                                <Plus className="w-5 h-5 mr-2" /> View Analytics
                               </Button>
                             </Link>
                           </div>
