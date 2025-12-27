@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SongCard from "@/components/SongCard";
 
+
 export default function Favourites() {
   const [songs, setSongs] = useState<any[]>([]);
 
@@ -31,7 +32,9 @@ export default function Favourites() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h2 className="text-2xl font-bold mb-6">❤️ Your Favourites</h2>
+       <h1 className="text-3xl md:text-5xl font-display font-bold mb-5">
+                Your Favourites
+            </h1>
 
       {songs.length === 0 ? (
         <p className="text-muted-foreground">

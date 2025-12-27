@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../lib/firebase";
 import {Headphones,Heart,BarChart3} from "lucide-react"
 import {Link} from "react-router-dom"
-import {Plus } from "lucide-react";
+import {Plus,Gamepad2 } from "lucide-react";
 
 type Song = {
   name: string;
@@ -95,7 +95,6 @@ const Detect = () => {
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [emotionResult, setEmotionResult] = useState<EmotionResult>(null);
   const [isWebcamActive, setIsWebcamActive] = useState(false);
-
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -167,6 +166,8 @@ const Detect = () => {
       try {
         const file = base64ToFile(imageData, "emotion.jpg");
         const result = await detectEmotion(file);
+        localStorage.setItem("detectedEmotion", result.emotion.toLowerCase());
+        localStorage.setItem("emotionConfidence", result.confidence.toString()); 
         setEmotionResult({
           emotion: result.emotion,
           confidence: result.confidence,
@@ -246,7 +247,7 @@ const handleSignOut = async () => {
               >
                 <Card
                   variant="glass"
-                  className="p-8 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
+                  className="p-10 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
                   onClick={() => handleModeSelect("webcam")}
                 >
                   <div className="text-center">
@@ -262,7 +263,7 @@ const handleSignOut = async () => {
 
                 <Card
                   variant="glass"
-                  className="p-8 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
+                  className="p-10 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
                   onClick={() => handleModeSelect("upload")}
                 >
                   <div className="text-center">
@@ -278,7 +279,7 @@ const handleSignOut = async () => {
                 <Link to="/playlist" className="block">
                 <Card
                     variant="glass"
-                    className="p-8 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
+                    className="p-10 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
                   >
                     <div className="text-center">
                       <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -294,7 +295,7 @@ const handleSignOut = async () => {
                 <Link to="/favourites" className="block">
                 <Card
                     variant="glass"
-                    className="p-8 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
+                    className="p-10 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
                   >
                     <div className="text-center">
                       <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -307,10 +308,10 @@ const handleSignOut = async () => {
                     </div>
                   </Card>
                 </Link>
-                 <Link to="/analytics" className="block">
+                <Link to="/analytics" className="block">
                 <Card
                     variant="glass"
-                    className="p-8 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
+                    className="p-10 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
                   >
                     <div className="text-center">
                       <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -319,6 +320,22 @@ const handleSignOut = async () => {
                       <h3 className="text-xl font-display font-semibold mb-2">Analytics Dashboard</h3>
                       <p className="text-muted-foreground text-sm">
                         View general trends of your listening history
+                      </p>
+                    </div>
+                  </Card>
+                </Link>
+                <Link to="/emotiongame" className="block">
+                <Card
+                    variant="glass"
+                    className="p-10 cursor-pointer hover:border-primary/50 transition-all duration-300 group"
+                  >
+                    <div className="text-center">
+                      <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Gamepad2 className="w-10 h-10 text-primary-foreground" />
+                      </div>
+                      <h3 className="text-xl font-display font-semibold mb-2">Play a Game</h3>
+                      <p className="text-muted-foreground text-sm">
+                        Burst emotion bubbles and earn brownie points!
                       </p>
                     </div>
                   </Card>
@@ -449,7 +466,15 @@ const handleSignOut = async () => {
                           <div className="mt-6 flex flex-col gap-3">
                             <Link to="/analytics">
                               <Button variant="secondary" size="lg" className="w-full">
-                                <Plus className="w-5 h-5 mr-2" /> View Analytics
+                                <BarChart3 className="w-5 h-5 mr-2" /> View Analytics
+                              </Button>
+                            </Link>
+                          </div>
+                          {/*Button: Play a Game*/}
+                          <div className="mt-6 flex flex-col gap-3">
+                            <Link to="/emotiongame">
+                              <Button variant="secondary" size="lg" className="w-full">
+                                <Gamepad2 className="w-5 h-5 mr-2" /> Play a fun game
                               </Button>
                             </Link>
                           </div>

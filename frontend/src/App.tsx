@@ -12,7 +12,8 @@ import NotFound from "./pages/NotFound";
 import Playlist from "./pages/Playlist";
 import Favourites from "./pages/Favourites";
 import Analytics from "./pages/Analytics";
-
+import EmotionGame from "./pages/GamePage";
+import GamePage from "./pages/GamePage";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/playlist" element={<Playlist />} />
           <Route path="/favourites" element={<Favourites />} />
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/emotiongame" element={<GamePage />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
