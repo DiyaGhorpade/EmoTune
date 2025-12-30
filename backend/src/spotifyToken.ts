@@ -31,9 +31,5 @@ export async function getSpotifyToken() {
 cachedToken = data.access_token;
 tokenExpiry = Date.now() + data.expires_in * 1000;
 
-
-  cachedToken = data.access_token;
-  tokenExpiry = Date.now() + data.expires_in * 1000;
-
   return cachedToken;
 }

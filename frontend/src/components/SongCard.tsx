@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Heart, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 
+
 type SongCardProps = {
   title: string;
   artist: string;
