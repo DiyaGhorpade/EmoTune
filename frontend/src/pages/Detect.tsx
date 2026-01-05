@@ -40,55 +40,6 @@ function base64ToFile(base64: string, filename: string): File {
   return new File([u8arr], filename, { type: mime });
 }
 
-// Mock song data for different emotions
-const songsByEmotion: Record<
-  string,
-  Array<{ title: string; artist: string; coverUrl: string }>
-> = {
-  happy: [
-    { title: "Happy", artist: "Pharrell Williams", coverUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" },
-    { title: "Good as Hell", artist: "Lizzo", coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop" },
-    { title: "Can't Stop the Feeling", artist: "Justin Timberlake", coverUrl: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=300&h=300&fit=crop" },
-    { title: "Uptown Funk", artist: "Bruno Mars", coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&h=300&fit=crop" },
-  ],
-  sad: [
-    { title: "Someone Like You", artist: "Adele", coverUrl: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&h=300&fit=crop" },
-    { title: "Fix You", artist: "Coldplay", coverUrl: "https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=300&h=300&fit=crop" },
-    { title: "Skinny Love", artist: "Bon Iver", coverUrl: "https://images.unsplash.com/photo-1485579149621-3123dd979885?w=300&h=300&fit=crop" },
-    { title: "The Night We Met", artist: "Lord Huron", coverUrl: "https://images.unsplash.com/photo-1445375011782-2384686778a0?w=300&h=300&fit=crop" },
-  ],
-  angry: [
-    { title: "Killing in the Name", artist: "Rage Against the Machine", coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=300&h=300&fit=crop" },
-    { title: "Break Stuff", artist: "Limp Bizkit", coverUrl: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=300&h=300&fit=crop" },
-    { title: "Bulls on Parade", artist: "RATM", coverUrl: "https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=300&h=300&fit=crop" },
-    { title: "Given Up", artist: "Linkin Park", coverUrl: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&h=300&fit=crop" },
-  ],
-  disgust: [
-    { title: "Smells Like Teen Spirit", artist: "Nirvana", coverUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" },
-    { title: "Basket Case", artist: "Green Day", coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop" },
-    { title: "Come as You Are", artist: "Nirvana", coverUrl: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=300&h=300&fit=crop" },
-    { title: "Lithium", artist: "Nirvana", coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&h=300&fit=crop" },
-  ],
-  surprise: [
-    { title: "Electric Feel", artist: "MGMT", coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=300&fit=crop" },
-    { title: "Take On Me", artist: "A-ha", coverUrl: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300&h=300&fit=crop" },
-    { title: "Mr. Brightside", artist: "The Killers", coverUrl: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=300&h=300&fit=crop" },
-    { title: "Bizarre Love Triangle", artist: "New Order", coverUrl: "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=300&h=300&fit=crop" },
-  ],
-  fear: [
-    { title: "Breathe Me", artist: "Sia", coverUrl: "https://images.unsplash.com/photo-1458560871784-56d23406c091?w=300&h=300&fit=crop" },
-    { title: "Mad World", artist: "Gary Jules", coverUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" },
-    { title: "Creep", artist: "Radiohead", coverUrl: "https://images.unsplash.com/photo-1485579149621-3123dd979885?w=300&h=300&fit=crop" },
-    { title: "Unsteady", artist: "X Ambassadors", coverUrl: "https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=300&h=300&fit=crop" },
-  ],
-  neutral: [
-    { title: "Weightless", artist: "Marconi Union", coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop" },
-    { title: "Clair de Lune", artist: "Debussy", coverUrl: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=300&h=300&fit=crop" },
-    { title: "Gymnopédie No.1", artist: "Erik Satie", coverUrl: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=300&h=300&fit=crop" },
-    { title: "Intro", artist: "The xx", coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&h=300&fit=crop" },
-  ],
-};
-
 const Detect = () => {
   const [mode, setMode] = useState<"webcam" | "upload" | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);

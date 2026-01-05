@@ -83,7 +83,7 @@ def get_music(emotion):
                 "tag": tag,
                 "api_key": LASTFM_API_KEY,
                 "format": "json",
-                "limit": 5,
+                "limit": 3,
             },
         )
 
