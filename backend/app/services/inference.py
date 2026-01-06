@@ -8,7 +8,7 @@ from fastapi import UploadFile
 from app.core.emotions import EMOTIONS
 from app.utils.image_utils import preprocess_image
 
-# Custom Attention Layer (matches training)
+# Custom Attention Layer 
 @tf.keras.utils.register_keras_serializable()
 class AttentionLayer(layers.Layer):
     def __init__(self, **kwargs):
@@ -53,7 +53,7 @@ if not os.path.exists(MODEL_PATH):
 _model = load_model(
     MODEL_PATH,
     custom_objects={"AttentionLayer": AttentionLayer},
-    compile=False  # for inference only
+    compile=False  
 )
 print("Emotion model loaded successfully")
 

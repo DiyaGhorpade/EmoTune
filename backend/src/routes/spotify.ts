@@ -1,3 +1,4 @@
+/*creating an Express API route that frontend can call to get a Spotify track ID by providing a track name and artist*/
 import express from "express";
 import { getSpotifyToken } from "../spotifyToken";
 import { searchSpotifyTrack } from "../spotifySearch";

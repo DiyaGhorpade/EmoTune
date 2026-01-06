@@ -1,3 +1,4 @@
+/*getting and caching a Spotify access token using Spotify’s Client Credentials OAuth flow*/
 import fetch from "node-fetch";
 
 let cachedToken: string | null = null;

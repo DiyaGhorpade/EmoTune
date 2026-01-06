@@ -1,3 +1,4 @@
+/*Search fro spotify song and return trackID after checking if OAuth token is valid*/
 import fetch from "node-fetch";
 
 export async function searchSpotifyTrack(

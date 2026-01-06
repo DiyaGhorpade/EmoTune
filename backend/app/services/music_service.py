@@ -6,7 +6,7 @@ from app.core.config import (
     SPOTIFY_CLIENT_ID,
     SPOTIFY_CLIENT_SECRET,
 )
-
+#Emotion-genre mapping
 MOOD_MAP = {
     "happy": ["happy", "dance", "pop"],
     "sad": ["sad", "acoustic", "melancholic"],
@@ -17,7 +17,7 @@ MOOD_MAP = {
     "disgust": ["dark", "industrial"],
 }
 
-# ---------------- SPOTIFY TOKEN ----------------
+#Spotify token
 
 _SPOTIFY_TOKEN = None
 _SPOTIFY_EXPIRY = 0
@@ -69,7 +69,6 @@ def search_spotify(track_name, artist_name):
     return None
 
 
-# ---------------- MAIN FUNCTION ----------------
 
 def get_music(emotion):
     songs = []

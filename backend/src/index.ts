@@ -1,3 +1,4 @@
+/*connect spotify API routes so frontend can call*/
 import express from "express";
 import cors from "cors";
 import spotifyRoutes from "./routes/spotify";
