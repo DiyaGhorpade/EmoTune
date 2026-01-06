@@ -1,3 +1,4 @@
+/*one song per game based on detected emotion*/
 export const spotifyPlaylists: Record<string, string> = {
   happy: "37i9dQZF1DXdPec7aLTmlC",
   sad: "37i9dQZF1DX7qK8ma5wgG1",

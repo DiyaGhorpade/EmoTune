@@ -31,7 +31,7 @@ export default function Favourites() {
 
         {songs.length === 0 ? (
           <div className="glass p-10 rounded-2xl text-center text-muted-foreground">
-            💙 No favourites yet  
+            No favourites yet  
             <p className="mt-2 text-sm">
               Tap the heart icon on any song to save it here
             </p>

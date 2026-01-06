@@ -1,4 +1,3 @@
-// src/services/lastfm.ts
 const API_KEY = import.meta.env.VITE_LASTFM_API_KEY;
 
 export const getRecommendedTrack = async (emotion: string) => {

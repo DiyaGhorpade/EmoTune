@@ -53,7 +53,7 @@ export default function Playlists() {
 
             {playlists.length === 0 ? (
               <div className="glass p-10 rounded-2xl text-center text-muted-foreground">
-                🎧 No playlists yet  
+                No playlists yet  
                 <p className="mt-2 text-sm">
                   Add songs using the + icon to create one
                 </p>
